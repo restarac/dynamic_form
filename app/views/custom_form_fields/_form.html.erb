@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :custom_form_id %><br>
-    <%= f.text_field :custom_form_id %>
+    <%= f.select :type, options_for_select(@type_values), {}, {class: "form-control"} %>
   </div>
   <div class="field">
     <%= f.label :order %><br>
@@ -28,8 +28,8 @@
     <%= f.text_field :value %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.text_field :type %>
+    <%= f.label "#{:type} fred:" %><br>
+    <%= f.select :type, options_for_select(@type_values), {}, {class: "form-control"} %>
   </div>
   <div class="actions">
     <%= f.submit %>

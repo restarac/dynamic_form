@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161028235405) do
 
   create_table "custom_forms", force: :cascade do |t|
     t.integer  "sub_category_id"
+    t.string   "title"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

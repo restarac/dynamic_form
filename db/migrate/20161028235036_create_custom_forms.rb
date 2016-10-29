@@ -2,6 +2,7 @@ class CreateCustomForms < ActiveRecord::Migration
   def change
     create_table :custom_forms do |t|
       t.references :sub_category, index: true
+      t.string :title
 
       t.timestamps null: false
     end

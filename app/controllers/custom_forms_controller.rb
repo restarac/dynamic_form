@@ -1,13 +1,10 @@
 class CustomFormsController < ApplicationController
-  before_action :set_custom_form, only: [:show, :edit, :update, :destroy]
+  before_action :set_custom_form, only: [:edit, :update, :destroy]
+  before_action :fill_form, only: [:new, :edit]
 
   # GET /custom_forms
   def index
     @custom_forms = CustomForm.all
-  end
-
-  # GET /custom_forms/1
-  def show
   end
 
   # GET /custom_forms/new
@@ -17,6 +14,7 @@ class CustomFormsController < ApplicationController
 
   # GET /custom_forms/1/edit
   def edit
+    @custom_fields = CustomFormField.where("custom_form_id = ?", @custom_form.id)
   end
 
   # POST /custom_forms
@@ -49,6 +47,10 @@ class CustomFormsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_custom_form
       @custom_form = CustomForm.find(params[:id])
+    end
+    
+    def fill_form
+        @subCategory = SubCategory.all
     end
 
     # Only allow a trusted parameter "white list" through.

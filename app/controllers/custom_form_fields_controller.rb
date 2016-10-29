@@ -1,14 +1,6 @@
 class CustomFormFieldsController < ApplicationController
-  before_action :set_custom_form_field, only: [:show, :edit, :update, :destroy]
-
-  # GET /custom_form_fields
-  def index
-    @custom_form_fields = CustomFormField.all
-  end
-
-  # GET /custom_form_fields/1
-  def show
-  end
+  before_action :set_custom_form_field, only: [:edit, :update, :destroy]
+  before_action :fill_form, only: [:new, :edit]
 
   # GET /custom_form_fields/new
   def new
@@ -49,6 +41,11 @@ class CustomFormFieldsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_custom_form_field
       @custom_form_field = CustomFormField.find(params[:id])
+      @custom_form_field.custom_form = CustomForm.find(params[:custom_form_id])
+    end
+    
+    def fill_form
+        @type_values = CustomFormField.subclasses.map {|i| [i, i]}
     end
 
     # Only allow a trusted parameter "white list" through.
