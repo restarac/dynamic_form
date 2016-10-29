@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Custom Form Fields</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Custom form</th>
+      <th>Order</th>
+      <th>Title</th>
+      <th>Value</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @custom_form_fields.each do |custom_form_field| %>
+      <tr>
+        <td><%= custom_form_field.custom_form %></td>
+        <td><%= custom_form_field.order %></td>
+        <td><%= custom_form_field.title %></td>
+        <td><%= custom_form_field.value %></td>
+        <td><%= custom_form_field.type %></td>
+        <td><%= link_to 'Show', custom_form_field %></td>
+        <td><%= link_to 'Edit', edit_custom_form_field_path(custom_form_field) %></td>
+        <td><%= link_to 'Destroy', custom_form_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Custom form field', new_custom_form_field_path %>

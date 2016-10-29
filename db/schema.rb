@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20121230220019) do
+ActiveRecord::Schema.define(version: 20161028235405) do
 
   create_table "categories", force: :cascade do |t|
     t.text     "name"
@@ -19,6 +19,26 @@ ActiveRecord::Schema.define(version: 20121230220019) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "custom_form_fields", force: :cascade do |t|
+    t.integer  "custom_form_id"
+    t.integer  "order"
+    t.string   "title"
+    t.string   "value"
+    t.string   "type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "custom_form_fields", ["custom_form_id"], name: "index_custom_form_fields_on_custom_form_id"
+
+  create_table "custom_forms", force: :cascade do |t|
+    t.integer  "sub_category_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "custom_forms", ["sub_category_id"], name: "index_custom_forms_on_sub_category_id"
 
   create_table "sub_categories", force: :cascade do |t|
     t.integer  "category_id"

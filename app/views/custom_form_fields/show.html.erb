@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Custom form:</strong>
+  <%= @custom_form_field.custom_form %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @custom_form_field.order %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @custom_form_field.title %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @custom_form_field.value %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @custom_form_field.type %>
+</p>
+
+<%= link_to 'Edit', edit_custom_form_field_path(@custom_form_field) %> |
+<%= link_to 'Back', custom_form_fields_path %>

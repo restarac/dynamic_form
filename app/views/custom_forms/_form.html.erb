@@ -1,0 +1,21 @@
+<%= form_for(@custom_form) do |f| %>
+  <% if @custom_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@custom_form.errors.count, "error") %> prohibited this custom_form from being saved:</h2>
+
+      <ul>
+      <% @custom_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :sub_category_id %><br>
+    <%= f.text_field :sub_category_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

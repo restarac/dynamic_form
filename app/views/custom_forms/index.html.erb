@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Custom Forms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sub category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @custom_forms.each do |custom_form| %>
+      <tr>
+        <td><%= custom_form.sub_category %></td>
+        <td><%= link_to 'Show', custom_form %></td>
+        <td><%= link_to 'Edit', edit_custom_form_path(custom_form) %></td>
+        <td><%= link_to 'Destroy', custom_form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Custom form', new_custom_form_path %>
