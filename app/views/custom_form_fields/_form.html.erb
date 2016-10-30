@@ -1,10 +1,10 @@
-<%= form_for(@custom_form_field) do |f| %>
-  <% if @custom_form_field.errors.any? %>
+<%= form_for custom_form_field, url: {action: form_method}  do |f| %>
+  <% if custom_form_field.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@custom_form_field.errors.count, "error") %> prohibited this custom_form_field from being saved:</h2>
+      <h2><%= pluralize(custom_form_field.errors.count, "error") %> prohibited this custom_form_field from being saved:</h2>
 
       <ul>
-      <% @custom_form_field.errors.full_messages.each do |message| %>
+      <% custom_form_field.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,26 +12,24 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :custom_form_id %><br>
-    <%= f.select :type, options_for_select(@type_values), {}, {class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :order %><br>
-    <%= f.number_field :order %>
+    <%= f.label :type %><br>
+    <%= f.select :type, options_for_select(type_values, custom_form_field.type) %>
   </div>
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
+    <%= f.label :order %><br>
+    <%= f.number_field :order %>
+  </div>
+  <div class="field">
     <%= f.label :value %><br>
     <%= f.text_field :value %>
   </div>
-  <div class="field">
-    <%= f.label "#{:type} fred:" %><br>
-    <%= f.select :type, options_for_select(@type_values), {}, {class: "form-control"} %>
-  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to '<- Back to CustomForm', edit_custom_form_path(custom_form_field.custom_form), {class: "btn btn btn-info", role: "button"} %>
+    <%= captured %>
   </div>
 <% end %>

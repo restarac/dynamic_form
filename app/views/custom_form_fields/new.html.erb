@@ -1,5 +1,11 @@
-<h1>New Custom Form Field</h1>
+<h1>"<%= @custom_form_field.form_name %>" Fields</h1>
 
-<%= render 'form' %>
+<%= render 'form',
+    custom_form_field: @custom_form_field,
+    type_values: @type_values,
+    form_method: 'create',
+    captured: capture { %>
+    <%= submit_tag 'Save', class: "btn btn-success" %>
+<% } %>
 
-<%= link_to 'Back', custom_form_fields_path %>
+<%= render 'list', fields: @fields %>

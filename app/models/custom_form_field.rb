@@ -1,5 +1,9 @@
 class CustomFormField < ActiveRecord::Base
   belongs_to :custom_form
+  
+  def form_name
+    custom_form.title
+  end
 end
 
 class CustomFormTextareaField < CustomFormField

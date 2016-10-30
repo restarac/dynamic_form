@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   resources :custom_forms, except: [:show] do
     resources :custom_form_fields, except: [:show,:index], path: 'fields', as: 'field'
   end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

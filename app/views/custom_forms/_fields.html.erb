@@ -17,8 +17,8 @@
         <td><%= custom_form_field.type %></td>
         <td><%= custom_form_field.order %></td>
         <td><%= custom_form_field.value %></td>
-        <td><%= link_to 'Edit', edit_custom_form_field_path(custom_form_field) %></td>
-        <td><%= link_to 'Destroy', custom_form_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_custom_form_field_path(custom_form_field.custom_form, custom_form_field) %></td>
+        <td><%= link_to 'Destroy', custom_form_field_path(custom_form_field.custom_form, custom_form_field), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

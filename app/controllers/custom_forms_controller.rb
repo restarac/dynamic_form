@@ -1,6 +1,6 @@
 class CustomFormsController < ApplicationController
   before_action :set_custom_form, only: [:edit, :update, :destroy]
-  before_action :fill_form, only: [:new, :edit]
+  before_action :fill_form, only: [:new, :edit, :update]
 
   # GET /custom_forms
   def index
@@ -17,13 +17,14 @@ class CustomFormsController < ApplicationController
     @custom_fields = CustomFormField.where("custom_form_id = ?", @custom_form.id)
   end
 
-  # POST /custom_forms
+  # equivalent to 'add_fields'
   def create
     @custom_form = CustomForm.new(custom_form_params)
 
     if @custom_form.save
-      redirect_to edit_custom_form_path @custom_form, notice: 'Custom form was successfully created.'
+      redirect_to new_custom_form_field_path(@custom_form), notice: 'Custom form was successfully created.'
     else
+      fill_form
       render :new
     end
   end
@@ -31,7 +32,7 @@ class CustomFormsController < ApplicationController
   # PATCH/PUT /custom_forms/1
   def update
     if @custom_form.update(custom_form_params)
-      flash[:notice]= 'Segmentation was successfully updated.'
+      flash[:notice]= 'Custom form was successfully updated.'
     end
     render :edit
   end

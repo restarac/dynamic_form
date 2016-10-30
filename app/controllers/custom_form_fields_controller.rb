@@ -5,6 +5,7 @@ class CustomFormFieldsController < ApplicationController
   # GET /custom_form_fields/new
   def new
     @custom_form_field = CustomFormField.new
+    @custom_form_field.custom_form = CustomForm.find(params[:custom_form_id])
   end
 
   # GET /custom_form_fields/1/edit
@@ -14,10 +15,12 @@ class CustomFormFieldsController < ApplicationController
   # POST /custom_form_fields
   def create
     @custom_form_field = CustomFormField.new(custom_form_field_params)
+    @custom_form_field.custom_form = CustomForm.find(params[:custom_form_id])
 
     if @custom_form_field.save
-      redirect_to @custom_form_field, notice: 'Custom form field was successfully created.'
+      redirect_to new_custom_form_field_path(@custom_form_field.custom_form), notice: 'Custom form field was successfully created.'
     else
+      fill_form
       render :new
     end
   end
@@ -25,8 +28,9 @@ class CustomFormFieldsController < ApplicationController
   # PATCH/PUT /custom_form_fields/1
   def update
     if @custom_form_field.update(custom_form_field_params)
-      redirect_to @custom_form_field, notice: 'Custom form field was successfully updated.'
+      redirect_to new_custom_form_field_path(@custom_form_field.custom_form), notice: 'Custom form field was successfully updated.'
     else
+      fill_form
       render :edit
     end
   end
@@ -34,22 +38,22 @@ class CustomFormFieldsController < ApplicationController
   # DELETE /custom_form_fields/1
   def destroy
     @custom_form_field.destroy
-    redirect_to custom_form_fields_url, notice: 'Custom form field was successfully destroyed.'
+    redirect_to new_custom_form_field_path(@custom_form_field.custom_form), notice: 'Custom form field was successfully destroyed.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_custom_form_field
       @custom_form_field = CustomFormField.find(params[:id])
-      @custom_form_field.custom_form = CustomForm.find(params[:custom_form_id])
     end
     
     def fill_form
         @type_values = CustomFormField.subclasses.map {|i| [i, i]}
+        @fields = CustomFormField.where(custom_form_id: params[:custom_form_id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def custom_form_field_params
-      params.require(:custom_form_field).permit(:custom_form_id, :order, :title, :value, :type)
+      params.require(@custom_form_field.class.name.underscore.to_sym).permit(:order, :title, :value, :type)
     end
 end
