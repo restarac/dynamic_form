@@ -1,0 +1,26 @@
+<% if fields %>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Type</th>
+      <th>Order</th>
+      <th>Value</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% fields.each do |custom_form_field| %>
+      <tr>
+        <td><%= custom_form_field.title %></td>
+        <td><%= custom_form_field.type %></td>
+        <td><%= custom_form_field.order %></td>
+        <td><%= custom_form_field.value %></td>
+        <td><%= link_to 'Edit', edit_custom_form_field_path(custom_form_field) %></td>
+        <td><%= link_to 'Destroy', custom_form_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% end %>

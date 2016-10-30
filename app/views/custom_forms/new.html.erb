@@ -1,5 +1,7 @@
 <h1>New Custom Form</h1>
 
-<%= render 'form' %>
+<p id="notice"><%= notice %></p>
 
-<%= link_to 'Back', custom_forms_path %>
+<%= render 'form', custom_form: @custom_form, captured: capture { %>
+    <%= submit_tag 'Add fields', class: "btn btn-success" %>
+<% } %>

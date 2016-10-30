@@ -22,7 +22,7 @@ class CustomFormsController < ApplicationController
     @custom_form = CustomForm.new(custom_form_params)
 
     if @custom_form.save
-      redirect_to @custom_form, notice: 'Custom form was successfully created.'
+      redirect_to edit_custom_form_path @custom_form, notice: 'Custom form was successfully created.'
     else
       render :new
     end
@@ -31,10 +31,9 @@ class CustomFormsController < ApplicationController
   # PATCH/PUT /custom_forms/1
   def update
     if @custom_form.update(custom_form_params)
-      redirect_to @custom_form, notice: 'Custom form was successfully updated.'
-    else
-      render :edit
+      flash[:notice]= 'Segmentation was successfully updated.'
     end
+    render :edit
   end
 
   # DELETE /custom_forms/1
@@ -50,11 +49,11 @@ class CustomFormsController < ApplicationController
     end
     
     def fill_form
-        @subCategory = SubCategory.all
+        @sub_categories = SubCategory.all
     end
 
     # Only allow a trusted parameter "white list" through.
     def custom_form_params
-      params.require(:custom_form).permit(:sub_category_id)
+      params.require(:custom_form).permit(:sub_category_id, :title)
     end
 end

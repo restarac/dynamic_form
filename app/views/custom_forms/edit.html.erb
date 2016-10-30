@@ -1,6 +1,13 @@
 <h1>Editing Custom Form</h1>
 
-<%= render 'form' %>
+<p id="notice"><%= notice %></p>
 
-<%= link_to 'Show', @custom_form %> |
-<%= link_to 'Back', custom_forms_path %>
+<%= render 'form', custom_form: @custom_form, captured: capture { %>
+    <%= submit_tag 'Update', class: "btn btn-info" %>
+    <%= link_to 'Add fields', new_custom_form_field_path(@custom_form), {class: "btn btn btn-success", role: "button"}  %>
+<% } %>
+
+<section class="detail-list">
+    <h1>fields:</h1>
+    <%= render 'fields', fields: @custom_form.custom_form_fields%>
+<section>
