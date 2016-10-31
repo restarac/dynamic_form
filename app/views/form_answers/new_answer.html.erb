@@ -1,0 +1,27 @@
+<h1>Answer for "<%= @form_answer.custom_form.title %>"</h1>
+<p id="notice"><%= notice %></p>
+
+<% if @errors %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@errors.count, "error") %> prohibited this form_answer from being saved:</h2>
+
+    <ul>
+    <% @errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag(save_answer_form_answer_path(@form_answer), method: "post") do %>
+  <% @fields.each_with_index do |field, index| %>
+    <div class="field">
+      <%= field.html_content "answer_#{field.id}" %>
+    </div>
+  <% end %>
+  
+  <div class="actions">
+    <%= link_to 'Back', form_answers_path %>
+    <%= submit_tag 'answer!' %>
+  </div>
+<% end %>

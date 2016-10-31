@@ -1,6 +1,27 @@
-<h1>Editing Form Answer</h1>
+<h1>Editing "<%= "#{@form_answer.custom_form.title} - ##{@form_answer.id}" %>"</h1>
+<p id="notice"><%= notice %></p>
 
-<%= render 'form' %>
+<% if @errors %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@errors.count, "error") %> prohibited this form_answer from being saved:</h2>
 
-<%= link_to 'Show', @form_answer %> |
-<%= link_to 'Back', form_answers_path %>
+    <ul>
+    <% @errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag(form_answer_path, method: "patch") do %>
+  <% @fields.each_with_index do |field, index| %>
+    <div class="field">
+      <%= field.html_content("answer_#{field.id}", @form_answer.answer_value_by(field))%>
+    </div>
+  <% end %>
+  
+  <div class="actions">
+    <%= link_to 'Back', form_answers_path %>
+    <%= submit_tag 'answer!' %>
+  </div>
+<% end %>

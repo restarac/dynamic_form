@@ -1,5 +1,25 @@
 <h1>New Form Answer</h1>
 
-<%= render 'form' %>
+<%= form_for(@form_answer) do |f| %>
+  <% if @form_answer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@form_answer.errors.count, "error") %> prohibited this form_answer from being saved:</h2>
+
+      <ul>
+      <% @form_answer.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :custom_form_id %><br>
+    <%= f.collection_select(:custom_form_id, CustomForm.all, :id, :title )%>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Back', form_answers_path %>

@@ -42,13 +42,15 @@ ActiveRecord::Schema.define(version: 20161031120308) do
   add_index "custom_forms", ["sub_category_id"], name: "index_custom_forms_on_sub_category_id"
 
   create_table "form_answer_fields", force: :cascade do |t|
-    t.integer  "form_answers_id"
+    t.integer  "form_answer_id"
+    t.integer  "custom_form_field_id"
     t.string   "value"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
-  add_index "form_answer_fields", ["form_answers_id"], name: "index_form_answer_fields_on_form_answers_id"
+  add_index "form_answer_fields", ["custom_form_field_id"], name: "index_form_answer_fields_on_custom_form_field_id"
+  add_index "form_answer_fields", ["form_answer_id"], name: "index_form_answer_fields_on_form_answer_id"
 
   create_table "form_answers", force: :cascade do |t|
     t.integer  "custom_form_id"

@@ -1,6 +1,4 @@
 class FormAnswersController < ApplicationController
-  before_action :set_form_answer, only: [:show, :edit, :update, :destroy]
-
   # GET /form_answers
   def index
     @form_answers = FormAnswer.all
@@ -8,6 +6,25 @@ class FormAnswersController < ApplicationController
 
   # GET /form_answers/1
   def show
+    @form_answer = FormAnswer.find(params[:id])
+    @fields = @form_answer.custom_form.custom_form_fields
+  end
+  
+  # GET /form_answers/1/new_answer
+  def new_answer
+    @form_answer = FormAnswer.find(params[:id])
+    @fields = CustomFormField.where(custom_form_id: @form_answer.custom_form.id).order(:order, :title)
+  end
+  
+  # POST /form_answers/1/new_answer
+  def save_answer
+    save_or_update
+    
+    if !@errors
+      redirect_to answer_form_path, notice: 'Form answer was successfully created.'
+    else
+      render :new_answer
+    end
   end
 
   # GET /form_answers/new
@@ -17,6 +34,8 @@ class FormAnswersController < ApplicationController
 
   # GET /form_answers/1/edit
   def edit
+    @form_answer = FormAnswer.find(params[:id])
+    @fields = CustomFormField.where(custom_form_id: @form_answer.custom_form.id).order(:order, :title)    
   end
 
   # POST /form_answers
@@ -24,7 +43,7 @@ class FormAnswersController < ApplicationController
     @form_answer = FormAnswer.new(form_answer_params)
 
     if @form_answer.save
-      redirect_to @form_answer, notice: 'Form answer was successfully created.'
+      redirect_to new_answer_form_answer_path(@form_answer), notice: 'Form answer was successfully created.'
     else
       render :new
     end
@@ -32,7 +51,9 @@ class FormAnswersController < ApplicationController
 
   # PATCH/PUT /form_answers/1
   def update
-    if @form_answer.update(form_answer_params)
+    save_or_update
+    
+    if !@errors
       redirect_to @form_answer, notice: 'Form answer was successfully updated.'
     else
       render :edit
@@ -41,18 +62,35 @@ class FormAnswersController < ApplicationController
 
   # DELETE /form_answers/1
   def destroy
+    @form_answer = FormAnswer.find(params[:id])
     @form_answer.destroy
     redirect_to form_answers_url, notice: 'Form answer was successfully destroyed.'
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_form_answer
-      @form_answer = FormAnswer.find(params[:id])
-    end
-
-    # Only allow a trusted parameter "white list" through.
     def form_answer_params
       params.require(:form_answer).permit(:custom_form_id)
+    end
+    
+    def save_or_update
+      @form_answer = FormAnswer.find(params[:id])
+      @fields = CustomFormField.where(custom_form_id: @form_answer.custom_form.id).order(:order, :title) 
+      
+      @fields.each do |field|
+        answer = @form_answer.answer_by field
+        value_answer = params["answer_#{field.id}".to_sym]
+        if (answer) #atualizar o valor
+          if !answer.update(value: value_answer)
+            @errors = answer.errors
+            break
+          end
+        else #nil deve criar...
+          form_answer_field = FormAnswerField.new(form_answer: @form_answer, custom_form_field: field, value: value_answer)
+          if !form_answer_field.save
+            @errors = form_answer_field.errors
+            break
+          end
+        end
+      end
     end
 end
