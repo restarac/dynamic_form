@@ -27,7 +27,7 @@ class CustomFormFieldsController < ApplicationController
 
   # PATCH/PUT /custom_form_fields/1
   def update
-    if @custom_form_field.update(custom_form_field_params)
+    if @custom_form_field.update(custom_form_field_params(@custom_form_field.class.name))
       redirect_to new_custom_form_field_path(@custom_form_field.custom_form), notice: 'Custom form field was successfully updated.'
     else
       fill_form
@@ -53,7 +53,7 @@ class CustomFormFieldsController < ApplicationController
     end
 
     # Only allow a trusted parameter "white list" through.
-    def custom_form_field_params
-      params.require(@custom_form_field.class.name.underscore.to_sym).permit(:order, :title, :value, :type)
+    def custom_form_field_params class_name="CustomFormField"
+      params.require(class_name.underscore.to_sym).permit(:order, :title, :value, :type)
     end
 end

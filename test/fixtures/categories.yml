@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyText
-  slug: MyText
+  name: Reformas e Reparos
+  slug: reformas_reparos
 
 two:
-  name: MyText
-  slug: MyText
+  name: Aulas
+  slug: aulas

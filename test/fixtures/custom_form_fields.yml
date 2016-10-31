@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  custom_form_id: 
+  custom_form_id: 1
   order: 1
-  title: MyString
-  value: MyString
-  type: 
+  title: qual o local
+  value: [casa, ap]
+  type: CustomFormSelectField
 
 two:
-  custom_form_id: 
+  custom_form_id: 2
   order: 1
-  title: MyString
-  value: MyString
-  type: 
+  title: Opiniao
+  value: Diga o que acha
+  type: CustomFormTextareaField

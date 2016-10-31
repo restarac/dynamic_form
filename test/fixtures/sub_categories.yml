@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  category: 
-  name: MyText
-  slug: MyText
+  category: 1
+  name: Pintor
+  slug: pintor
 
 two:
-  category: 
-  name: MyText
-  slug: MyText
+  category: 2
+  name: musica
+  slug: musica

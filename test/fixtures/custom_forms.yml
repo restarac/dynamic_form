@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sub_category_id: 
+  sub_category_id: 1 
+  title: encontrar
 
 two:
-  sub_category_id: 
+  sub_category_id: 1  
+  title: Teste 2
