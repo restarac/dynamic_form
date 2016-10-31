@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :form_answers
+
   resources :custom_forms, except: [:show] do
     resources :custom_form_fields, except: [:show,:index], path: 'fields', as: 'field'
   end

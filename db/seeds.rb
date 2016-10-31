@@ -9,3 +9,7 @@ Category.create(name: "Aulas", slug: "aulas").tap do |category|
   category.sub_categories.create(name: "Música", slug: "musica")
   category.sub_categories.create(name: "Idiomas", slug: "idiomas")
 end
+
+CustomForm.create(title: "feedback form", sub_category_id: 1).tap do |form|
+  form.custom_form_fields.create(order: 1, title: "Opiniao", value: "Diga o que acha", type: "CustomFormTextareaField")
+end

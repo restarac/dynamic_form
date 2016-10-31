@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161028235405) do
+ActiveRecord::Schema.define(version: 20161031120308) do
 
   create_table "categories", force: :cascade do |t|
     t.text     "name"
@@ -40,6 +40,23 @@ ActiveRecord::Schema.define(version: 20161028235405) do
   end
 
   add_index "custom_forms", ["sub_category_id"], name: "index_custom_forms_on_sub_category_id"
+
+  create_table "form_answer_fields", force: :cascade do |t|
+    t.integer  "form_answers_id"
+    t.string   "value"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "form_answer_fields", ["form_answers_id"], name: "index_form_answer_fields_on_form_answers_id"
+
+  create_table "form_answers", force: :cascade do |t|
+    t.integer  "custom_form_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "form_answers", ["custom_form_id"], name: "index_form_answers_on_custom_form_id"
 
   create_table "sub_categories", force: :cascade do |t|
     t.integer  "category_id"
