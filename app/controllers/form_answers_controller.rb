@@ -77,19 +77,10 @@ class FormAnswersController < ApplicationController
       @fields = CustomFormField.where(custom_form_id: @form_answer.custom_form.id).order(:order, :title) 
       
       @fields.each do |field|
-        answer = @form_answer.answer_by field
-        value_answer = params["answer_#{field.id}".to_sym]
-        if (answer) #atualizar o valor
-          if !answer.update(value: value_answer)
-            @errors = answer.errors
-            break
-          end
-        else #nil deve criar...
-          form_answer_field = FormAnswerField.new(form_answer: @form_answer, custom_form_field: field, value: value_answer)
-          if !form_answer_field.save
-            @errors = form_answer_field.errors
-            break
-          end
+        value_answer = params["answer_#{field.id}".to_sym]      
+        @errors = @form_answer.save_or_update_answer field, value_answer
+        if !@errors
+          break
         end
       end
     end
