@@ -1,16 +1,16 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Custom form:</strong>
-  <%= @form_answer.custom_form.title %>
+  <h1> Answer #<%= @form_answer.id %> for "<%= @form_answer.custom_form.title %>" </h1>
 </p>
-  <% @fields.each do |field| %>
-    <p>
-      <strong><%= field.title %>:</strong>
-      <% answer = @form_answer.answer_by(field) %>
-      <%= if (answer) then answer.value else 'Nao informado' end %>
-    </p>
-  <% end %>
+
+<% @fields.each do |field| %>
+  <p>
+    <strong><%= field.title %>:</strong>
+    <% answer = @form_answer.answer_by(field) %>
+    <%= if (answer) then answer.value else 'Nao informado' end %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_form_answer_path(@form_answer) %> |
 <%= link_to 'Back', form_answers_path %>

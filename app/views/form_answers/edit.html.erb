@@ -16,7 +16,7 @@
 <%= form_tag(form_answer_path, method: "patch") do %>
   <% @fields.each_with_index do |field, index| %>
     <div class="field">
-      <%= field.html_content("answer_#{field.id}", @form_answer.answer_value_by(field))%>
+      <%= render_field_html field, @form_answer.answer_value_by(field) %>
     </div>
   <% end %>
   

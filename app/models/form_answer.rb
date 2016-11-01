@@ -7,18 +7,19 @@ class FormAnswer < ActiveRecord::Base
     form_answer_fields.detect { |f| f.custom_form_field.id == field.id }
   end
   
+  def list_form_fields
+    custom_form.custom_form_fields.order(:order, :title)
+  end
+  
   def save_or_update_answer field, value_answer
     answer = answer_by field
-    if (answer) #atualizar o valor
-      if !answer.update(value: value_answer)
-        return answer.errors
-      end
-    else #nil deve criar...
-      form_answer_field = FormAnswerField.new(form_answer_id: id, custom_form_field: field, value: value_answer)
-      if !form_answer_field.save
-        return form_answer_field.errors
-      end
+    if (answer) #Atualizar o valor
+      answer.value = value_answer
+    else #(nil) Deve criar um novo...
+      answer = FormAnswerField.new(form_answer_id: id, custom_form_field: field, value: value_answer)
     end
+    
+    if !answer.save then answer.errors else nil end
   end
   
   def answer_value_by field

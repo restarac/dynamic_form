@@ -16,7 +16,7 @@
 <%= form_tag(save_answer_form_answer_path(@form_answer), method: "post") do %>
   <% @fields.each_with_index do |field, index| %>
     <div class="field">
-      <%= field.html_content "answer_#{field.id}" %>
+      <%= render_field_html field %>
     </div>
   <% end %>
   

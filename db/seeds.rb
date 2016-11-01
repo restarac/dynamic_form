@@ -11,5 +11,8 @@ Category.create(name: "Aulas", slug: "aulas").tap do |category|
 end
 
 CustomForm.create(title: "feedback form", sub_category_id: 1).tap do |form|
-  form.custom_form_fields.create(order: 1, title: "Opiniao", value: "Diga o que acha", type: "CustomFormTextareaField")
+  form.custom_form_fields.create(order: 2, title: "Opiniao", value: "Diga o que acha", type: "CustomFormTextareaField")
+  form.custom_form_fields.create(order: 1, title: "Nome", value: "Insira seu nome", type: "CustomFormTextField")
+  form.custom_form_fields.create(order: 3, title: "Sexo", value: "[Masculino, Feminino]", type: "CustomFormSelectField")
+  form.custom_form_fields.create(order: 4, title: "Escola", value: "[Ensino Medio, Tecnico, Graduação, Posgraduacao]", type: "CustomFormCheckboxField")
 end

@@ -1,0 +1,9 @@
+<div class="field">
+  <%= label_tag name, field.title %> <br>
+
+  <% to_array(field.value).each do |label|%>
+    <% name_check = "#{name}[#{label}]"%>
+    <%= check_box_tag(name_check, label, contains(value, label)) %>
+    <%= label_tag(name_check, label) %>
+  <% end %>
+</div>
