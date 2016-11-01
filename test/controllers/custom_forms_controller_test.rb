@@ -18,11 +18,16 @@ class CustomFormsControllerTest < ActionController::TestCase
 
   test "should create custom_form and redirect to new_custom_form_fields" do
     assert_difference('CustomForm.count') do
-      post :create, custom_form: { sub_category_id: @custom_form.sub_category_id }
+      post :create, custom_form: { sub_category_id: @custom_form.sub_category_id, title: @custom_form.title }
     end
 
     assert_redirected_to new_custom_form_field_path(assigns(:custom_form))
     assert_equal 'Custom form was successfully created.', flash[:notice]
+  end
+  
+  test "should stay on edit to show errors" do
+    post :create, custom_form: { sub_category_id: @custom_form.sub_category_id }
+    assert_response :success
   end
 
   test "should get edit" do
@@ -31,7 +36,7 @@ class CustomFormsControllerTest < ActionController::TestCase
   end
 
   test "should update custom_form and stay editing" do
-    patch :update, id: @custom_form, custom_form: { sub_category_id: @custom_form.sub_category_id }
+    patch :update, id: @custom_form, custom_form: { sub_category_id: @custom_form.sub_category_id, title: @custom_form.title }
     assert_response :success
     assert_equal 'Custom form was successfully updated.', flash[:notice]
   end

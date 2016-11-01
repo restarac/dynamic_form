@@ -3,6 +3,8 @@ class FormAnswer < ActiveRecord::Base
   
   has_many :form_answer_fields, dependent: :destroy
   
+  validates :custom_form_id, presence: true
+  
   def answer_by field
     form_answer_fields.detect { |f| f.custom_form_field.id == field.id }
   end

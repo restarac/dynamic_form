@@ -9,14 +9,14 @@ one:
 
 two:
   custom_form: one
-  order: 1
+  order: 3
   title: Opiniao
   value: Diga o que acha
   type: CustomFormTextareaField
   
 three:
   custom_form: one
-  order: 1
+  order: 2
   title: qual o local
   value: [casa, ap]
   type: CustomFormSelectField

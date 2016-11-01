@@ -21,4 +21,13 @@ class CustomFormFieldTest < ActiveSupport::TestCase
     field.type = CustomFormTextField.class.name
     assert_not field.save
   end
+  
+  test "should show the form name" do
+    formname = "Teste"
+    
+    field = CustomFormField.new
+    field.custom_form = CustomForm.new(title: "Teste")
+    
+    assert_equal formname, field.form_name
+  end
 end
