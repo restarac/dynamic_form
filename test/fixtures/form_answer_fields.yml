@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  form_answer: one
+  custom_form_field: one
+  value: casa
+
+two:
+  form_answer_id: one
+  custom_form_field_id: two
+  value: Não definida

@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  category: 1
+  category: one
   name: Pintor
   slug: pintor
 
 two:
-  category: 2
+  category: two
   name: musica
   slug: musica

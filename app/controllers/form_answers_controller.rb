@@ -51,7 +51,7 @@ class FormAnswersController < ApplicationController
     save_or_update
     
     if !@errors
-      redirect_to @form_answer, notice: 'Form answer was successfully updated.'
+      redirect_to form_answer_path(@form_answer), notice: 'Form answer was successfully updated.'
     else
       render :edit
     end
