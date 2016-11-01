@@ -24,10 +24,11 @@ class CustomFormsControllerTest < ActionController::TestCase
     assert_redirected_to new_custom_form_field_path(assigns(:custom_form))
     assert_equal 'Custom form was successfully created.', flash[:notice]
   end
-  
+
   test "should stay on edit to show errors" do
     post :create, custom_form: { sub_category_id: @custom_form.sub_category_id }
     assert_response :success
+    assert_select "div:match('id', ?)",/error_explanation/
   end
 
   test "should get edit" do

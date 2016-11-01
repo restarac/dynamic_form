@@ -33,7 +33,7 @@ class FormAnswersControllerTest < ActionController::TestCase
   end
 
   test "should save_answers form_answer and show" do
-    skip("TODO: Verificar fluxo de cadastro, nao está atualizando as respostas")
+    skip("TODO: Verificar fluxo de cadastro")
     assert_difference('FormAnswerField.count') do
       post :save_answer, id: @form_answer.custom_form_id, "answer_#{@form_field3.id}".to_sym() => { value: "casa" }
     end
